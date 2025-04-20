@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABCJS Basic Test</title>
+  <script src="https://cdn.jsdelivr.net/npm/abcjs@6.2.3/dist/abcjs-basic.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .container {
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    button {
+      padding: 5px 10px;
+      margin: 5px;
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e5e5e5;
+    }
+  </style>
+</head>
+<body>
+  <h1>ABCJS Basic Test</h1>
+  <p>This page demonstrates the simplest possible implementation of ABCJS, exactly as shown in the documentation.</p>
+
+  <div class="container">
+    <h2>Basic Example</h2>
+    <div id="basic-notation"></div>
+    <pre id="basic-notation-source">X:1
+T:Simple Example
+M:4/4
+L:1/8
+K:C
+CDEF GABc | cBAG FEDC |</pre>
+  </div>
+
+  <div class="container">
+    <h2>Für Elise (Simple)</h2>
+    <div id="fur-elise-simple"></div>
+    <pre id="fur-elise-simple-source">X:1
+T:Für Elise (Simple)
+C:Ludwig van Beethoven
+M:3/8
+L:1/16
+K:Am
+V:1 clef=treble
+e2 ^d2 e2 | ^d2 e2 B2 | d2 c2 A2 | C2 E2 A2 |
+V:2 clef=bass
+A,,4 A,, | A,,4 A,, | E,4 E, | A,,4 A,, |</pre>
+  </div>
+
+  <div class="container">
+    <h2>Für Elise with Chord Symbols</h2>
+    <div id="fur-elise-chord"></div>
+    <pre id="fur-elise-chord-source">X:1
+T:Für Elise
+C:Ludwig van Beethoven
+M:3/8
+L:1/16
+K:Am
+V:1 clef=treble
+"Am" e2 ^d2 e2 | ^d2 e2 B2 | d2 c2 A2 | C2 E2 A2 |
+"E" B2 e2 c2 | "E7" B2 ^d2 e2 | "Am" d2 c2 A2 | C2 E2 A2 |
+V:2 clef=bass
+A,,4 A,, | A,,4 A,, | E,4 E, | A,,4 A,, |
+E,4 E, | E,4 E, | A,,4 A,, | A,,4 A,, |</pre>
+  </div>
+
+  <div class="container">
+    <h2>Für Elise (Complete with Advanced Features)</h2>
+    <div id="fur-elise-complete"></div>
+    <pre id="fur-elise-complete-source">X:1
+T:Für Elise (Complete)
+C:Ludwig van Beethoven
+M:3/8
+L:1/16
+Q:1/8=80
+K:Am
+V:1 clef=treble
+V:2 clef=bass
+[V:1]"_p" !mp! "Am"e4 ^d4 | e4 ^d4 | e4 B4 | d4 c4 | A8 | 
+[V:2]"_p" A,,8 | A,,8 | E,,8 | E,,8 | A,,8 |
+%%
+[V:1] E4 A4 | c4 B4 | A8 | E4 A4 | c4 B4 |
+[V:2] A,,8 | E,,8 | A,,8 | A,,8 | E,,8 |
+%%
+[V:1] "_cresc." !4!A4 !3!B4 | !2!c4 !1!e4 | !fermata!!2!a8 | (3!mf!e2!3!^d2!2!e2 !1!^d2!2!e2 !3!B2 | !2!d2!3!c2 !1!A2 !open!C2!1!E2!3!A2 |
+[V:2] "_cresc." A,,8 | A,,8 | A,,8 | !mf!A,,8 | E,,8 |
+%%
+[V:1] |1 !2!B2!1!e2 !3!c2 !4!B2!1!e2 !3!c2 | !2!d2!3!c2 !1!A2 !open!C2!1!E2!3!A2 :|2 B2!1!e2 !2!g2 !4!a2!1!e2 !2!c'2 | !fff!!accent!a8 z4 ||
+[V:2] |1 E,,8 | A,,8 :|2 E,,8 | A,,8 ||
+%%
+[V:1] [K:C] |: !p!!tenuto!G2E2C2 !staccato!G,2C2E2 | G2c2e2 g2e2c2 | G2E2C2 G,2C2E2 | !trill!G8 z4 :|
+[V:2] [K:C] |: C,,8 | C,,8 | C,,8 | G,,8 :|
+%%
+[V:1] [K:Am] "_Ending" !p!"Am"e4 ^d4 | e4 ^d4 | e4 B4 | d4 c4 | A8 |
+[V:2] [K:Am] A,,8 | A,,8 | E,,8 | E,,8 | A,,8 |
+%%
+[V:1] "_rit." !fermata!A8 | z8 |]
+[V:2] "_rit." !fermata!A,,8 | z8 |]</pre>
+    <div class="mt-4">
+      <h3>Advanced Features Demonstrated:</h3>
+      <ul style="list-style-type: disc; margin-left: 20px;">
+        <li><strong>Standard voice numbers</strong>: Using V:1 and V:2 for clearer compatibility</li>
+        <li><strong>Dynamic markings</strong>: mp, mf, fff</li>
+        <li><strong>Articulations</strong>: tenuto, staccato, accent</li>
+        <li><strong>Fingering numbers</strong>: !1!, !2!, !3!, !4!</li>
+        <li><strong>Ornaments</strong>: Triplets, trills, fermatas</li>
+        <li><strong>Repeats and endings</strong>: |: :|, |1 :|2 ||</li>
+        <li><strong>Text annotations</strong>: "_cresc.", "_rit."</li>
+        <li><strong>Mid-piece key changes</strong>: [K:C] and back to [K:Am]</li>
+        <li><strong>Chord symbols</strong>: "Am", "E7"</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        // Basic example
+        var basicSource = document.getElementById('basic-notation-source').textContent;
+        ABCJS.renderAbc('basic-notation', basicSource, { responsive: "resize" });
+        
+        // Für Elise simple
+        var furEliseSimpleSource = document.getElementById('fur-elise-simple-source').textContent;
+        ABCJS.renderAbc('fur-elise-simple', furEliseSimpleSource, { responsive: "resize" });
+        
+        // Für Elise with chord symbols
+        var furEliseChordSource = document.getElementById('fur-elise-chord-source').textContent;
+        ABCJS.renderAbc('fur-elise-chord', furEliseChordSource, { 
+          responsive: "resize",
+          add_classes: true,
+          paddingbottom: 20,
+          paddingleft: 15,
+          paddingright: 15,
+          paddingtop: 15
+        });
+        
+        // Für Elise complete with advanced features
+        var furEliseCompleteSource = document.getElementById('fur-elise-complete-source').textContent;
+        ABCJS.renderAbc('fur-elise-complete', furEliseCompleteSource, { 
+          responsive: "resize",
+          add_classes: true,
+          paddingbottom: 20,
+          paddingleft: 15,
+          paddingright: 15,
+          paddingtop: 15,
+          format: {
+            gchordfont: "16px Arial bold",
+            annotationfont: "13px Arial",
+            composerfont: "14px Arial italic",
+            historyfont: "12px Arial",
+            infofont: "12px Arial",
+            measurefont: "12px Arial",
+            partsfont: "16px Arial bold",
+            tempofont: "14px Arial",
+            textfont: "14px Arial",
+            titlefont: "20px Arial bold"
+          }
+        });
+      } catch (error) {
+        console.error('Error rendering notation:', error);
+        document.body.innerHTML += '<div style="color: red; padding: 20px; border: 1px solid red;">Error rendering notation: ' + error.message + '</div>';
+      }
+    });
+  </script>
+</body>
+</html> 

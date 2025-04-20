@@ -68,6 +68,7 @@ export async function saveChat({
   title: string;
 }) {
   try {
+    console.log("fuck saving chat" + id)
     return await db.insert(chat).values({
       id,
       createdAt: new Date(),
@@ -162,7 +163,11 @@ export async function getChatsByUserId({
 
 export async function getChatById({ id }: { id: string }) {
   try {
+
+    console.log("shit" + id)
+
     const [selectedChat] = await db.select().from(chat).where(eq(chat.id, id));
+    console.log("shit" + selectedChat)
     return selectedChat;
   } catch (error) {
     console.error('Failed to get chat by id from database');

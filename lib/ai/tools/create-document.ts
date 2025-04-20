@@ -18,10 +18,19 @@ export const createDocument = ({ session, dataStream }: CreateDocumentProps) =>
       'Create a document for a writing or content creation activities. This tool will call other functions that will generate the contents of the document based on the title and kind.',
     parameters: z.object({
       title: z.string(),
+      description: z.string().optional().describe('Detailed information about what to include in the document, especially important for music sheets'),
       kind: z.enum(artifactKinds),
     }),
-    execute: async ({ title, kind }) => {
+    execute: async ({ title, description, kind }) => {
       const id = generateUUID();
+
+      console.log(`[create-document] Title being passed to ${kind} artifact: "${title}"`);
+      console.log(`[create-document] Description being passed to ${kind} artifact: "${description || 'None provided'}"`);
+
+      // For music sheets, use description as the actual prompt if provided
+      const contentPrompt = (kind === 'music' && description) 
+        ? description 
+        : title;
 
       dataStream.writeData({
         type: 'kind',
@@ -54,7 +63,7 @@ export const createDocument = ({ session, dataStream }: CreateDocumentProps) =>
 
       await documentHandler.onCreateDocument({
         id,
-        title,
+        title: contentPrompt, // Pass the full description as the "title" for music
         dataStream,
         session,
       });

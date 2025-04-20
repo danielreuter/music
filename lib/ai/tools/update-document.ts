@@ -16,9 +16,11 @@ export const updateDocument = ({ session, dataStream }: UpdateDocumentProps) =>
       id: z.string().describe('The ID of the document to update'),
       description: z
         .string()
-        .describe('The description of changes that need to be made'),
+        .describe('The detailed description of changes that need to be made. For music sheets, include explicit musical details like note patterns, key changes, rhythms, etc.'),
     }),
     execute: async ({ id, description }) => {
+      console.log(`[update-document] Description being passed to update: "${description}"`);
+
       const document = await getDocumentById({ id });
 
       if (!document) {
@@ -41,9 +43,13 @@ export const updateDocument = ({ session, dataStream }: UpdateDocumentProps) =>
         throw new Error(`No document handler found for kind: ${document.kind}`);
       }
 
+      // For music documents, pass the unmodified description 
+      // The prefix might be confusing the model rather than helping
+      const updateDescription = description;
+
       await documentHandler.onUpdateDocument({
         document,
-        description,
+        description: updateDescription,
         dataStream,
         session,
       });

@@ -1,0 +1,39 @@
+X:1
+T:Für Elise
+C:Ludwig van Beethoven
+O:1810 (pub. 1867)
+M:3/8
+L:1/16
+Q:1/8=100      % adjust to taste
+K:Am
+%% score (V1 V2)
+V:1 clef=treble
+V:2 clef=bass
+
+% ───────────  SECTION A  (bars 1‑23)  ───────────
+V:1
+|: "Am" e2 ^d2 e2 | ^d2 e2 B2 | d2 c2 A2 | C2 E2 A2 |
+    "E" B2 e2 c2 | "E7" B2 ^d2 e2 | "Am" d2 c2 A2 | C2 E2 A2 :|
+V:2
+|: A,,4  A,, | A,,4 A,, | E,4 E, | A,,4  A,, |
+    E,4  E,  | E,4  E,  | A,,4 A,, | E,4   A,, :|
+
+% ───────────  SECTION B  (bars 24‑59)  ───────────
+V:1
+| "C" c2 e2 a2 | g2 e2 c2 | "G7" B2 d2 g2 | f2 d2 B2 |
+  "Am" e2 d2 c2 | B2 A2 G2 | "E7" ^d2 e2 ^d2 | e4 z2 |
+  "C" c2 e2 a2 | g2 e2 c2 | "G7" B2 d2 g2 | f2 d2 B2 |
+  "Am" e2 d2 c2 | "E7" B2 ^d2 e2 | "Am" a4 z2 |
+V:2
+| C,,4  C,, | C,,4 C,, | G,,4 G,, | G,,4 G,, |
+  A,,4  A,, | A,,4 A,, | E,4  E,  | E,4 z2 |
+  C,,4  C,, | C,,4 C,, | G,,4 G,, | G,,4 G,, |
+  A,,4  A,, | E,4  E,  | A,,4 z2 |
+
+% ───────────  SECTION A′  (bars 60‑82, da capo style)  ───────────
+V:1
+| "Am" e2 ^d2 e2 | ^d2 e2 B2 | d2 c2 A2 | C2 E2 A2 |
+    "E" B2 e2 c2 | "E7" B2 ^d2 e2 | "Am" d2 c2 A2 | C2 E2 A2 ||
+V:2
+| A,,4  A,, | A,,4 A,, | E,4 E, | A,,4 A,, |
+  E,4   E,  | E,4  E,  | A,,4 A,, | E,4  A,, || 

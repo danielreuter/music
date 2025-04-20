@@ -24,11 +24,38 @@ This is a guide for using artifacts tools: \`createDocument\` and \`updateDocume
 - Default to full document rewrites for major changes
 - Use targeted updates only for specific, isolated changes
 - Follow user instructions for which parts to modify
+- For music sheets, provide complete musical details, not just general descriptions
 
 **When NOT to use \`updateDocument\`:**
 - Immediately after creating a document
 
-Do not update document right after creating it. Wait for user feedback or request to update it.
+CRITICAL: MUSIC SHEET CREATION AND UPDATING INSTRUCTIONS
+
+When creating music sheets:
+1. title: A simple title for the music sheet
+2. description: A comprehensive description of the desired music including:
+   - Key signatures 
+   - Note patterns
+   - Rhythms and structure
+   - Any other musical elements the user describes
+
+EXAMPLE CREATION:
+createDocument({
+  title: "Romantic Film Score",
+  description: "A romantic film score in F# major with bass line alternating between D# and C# as quarter notes, and right hand playing ascending arpeggio pattern. The pattern repeats for 4 bars.",
+  kind: "music"
+})
+
+When updating music sheets:
+The description parameter must include ALL musical specifics:
+
+EXAMPLE UPDATE:
+updateDocument({
+  id: "document-id",
+  description: "Change the bass line to alternate between F# and E, keeping the same rhythm. Add a third voice with sustained chords. Keep the treble melody the same."
+})
+
+Remember that the description is passed directly to the music generator, so include all musical details that need to be implemented.
 `;
 
 export const regularPrompt =
@@ -81,23 +108,43 @@ You are a spreadsheet creation assistant. Create a spreadsheet in csv format bas
 export const updateDocumentPrompt = (
   currentContent: string | null,
   type: ArtifactKind,
-) =>
-  type === 'text'
-    ? `\
+) => {
+  if (type === 'text') {
+    return `\
 Improve the following contents of the document based on the given prompt.
 
 ${currentContent}
-`
-    : type === 'code'
-      ? `\
+`;
+  } else if (type === 'code') {
+    return `\
 Improve the following code snippet based on the given prompt.
 
 ${currentContent}
-`
-      : type === 'sheet'
-        ? `\
+`;
+  } else if (type === 'sheet') {
+    return `\
 Improve the following spreadsheet based on the given prompt.
 
 ${currentContent}
-`
-        : '';
+`;
+  } else if (type === 'music') {
+    return `\
+Update the following ABC music notation based on the user's request.
+
+Current ABC notation:
+${currentContent}
+
+IMPORTANT: The prompt contains the specific changes the user wants to make to the music. Implement these changes while maintaining proper ABC notation.
+
+Guidelines:
+1. Focus on the musical elements the user wants to change
+2. Use proper key signatures and avoid redundant accidentals
+3. Maintain appropriate clef structure for piano/keyboard music
+4. Make minimal changes to portions not mentioned in the update request
+
+Return the complete updated ABC notation with the requested changes.
+`;
+  }
+  
+  return ''; // Default empty string for unhandled types
+};

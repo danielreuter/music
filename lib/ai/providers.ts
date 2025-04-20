@@ -4,6 +4,8 @@ import {
   wrapLanguageModel,
 } from 'ai';
 import { xai } from '@ai-sdk/xai';
+import { openai } from '@ai-sdk/openai';
+import { anthropic } from '@ai-sdk/anthropic';
 import { isTestEnvironment } from '../constants';
 import {
   artifactModel,
@@ -23,15 +25,15 @@ export const myProvider = isTestEnvironment
     })
   : customProvider({
       languageModels: {
-        'chat-model': xai('grok-2-1212'),
+        'chat-model': anthropic('claude-3-7-sonnet-latest'),
         'chat-model-reasoning': wrapLanguageModel({
-          model: xai('grok-3-mini-beta'),
+          model: anthropic('claude-3-7-sonnet-latest'),
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
-        'title-model': xai('grok-2-1212'),
-        'artifact-model': xai('grok-2-1212'),
+        'title-model': anthropic('claude-3-7-sonnet-latest'),
+        'artifact-model': anthropic('claude-3-7-sonnet-latest'),
       },
       imageModels: {
-        'small-model': xai.image('grok-2-image'),
+        'small-model': openai.image('gpt-4o'),
       },
     });
